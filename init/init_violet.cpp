@@ -80,8 +80,21 @@ void set_ro_product_prop(const std::string &prop, const std::string &value) {
 };
 
 void vendor_load_properties() {
-        set_ro_product_prop("model", "M1901F7S");
-        set_ro_product_prop("device", "violet");
-        set_ro_build_prop("fingerprint", "xiaomi/violet/violet:10/QKQ1.190915.002/V12.0.5.0.QFHINXM:user/release-keys");
-        property_override("ro.build.description", "violet-user 10 QKQ1.190915.002 V12.0.5.0.QFHINXM release-keys");
+   
+    std::string model;
+    std::string device;
+    std::string fingerprint;
+    std::string description;
+
+        model = "M1901F7S";
+        device = "violet";
+        fingerprint = "xiaomi/violet/violet:10/QKQ1.190915.002/V12.0.5.0.QFHINXM:user/release-keys";
+        description = "violet-user 10 QKQ1.190915.002 V12.0.5.0.QFHINXM release-keys";
+
+    
+
+    set_ro_build_prop("fingerprint", fingerprint);
+    set_ro_product_prop("device", device);
+    set_ro_product_prop("model", model);
+    property_override("ro.build.description", description.c_str());
 }
