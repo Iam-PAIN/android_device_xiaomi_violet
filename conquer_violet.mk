@@ -17,6 +17,7 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 
 # Inherit from violet device
 $(call inherit-product, device/xiaomi/violet/device.mk)
@@ -33,14 +34,11 @@ PRODUCT_DEVICE := violet
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Redmi Note 7 Pro
 PRODUCT_MANUFACTURER := Xiaomi
+TARGET_VENDOR_PRODUCT_NAME := violet
 
-BUILD_FINGERPRINT := "google/redfin/redfin:11/RQ2A.210405.005/7181113:user/release-keys"
+BUILD_FINGERPRINT := xiaomi/violet/violet:9/PKQ1.181203.001/V11.0.8.0.PFHINXM:user/release-keys
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="redfin-user 11 RQ2A.210405.005 7181113 release-keys" \
-    PRODUCT_NAME="violet"
-    
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.fingerprint=google/redfin/redfin:11/RQ2A.210405.005/7181113:user/release-keys
+    PRIVATE_BUILD_DESC="xiaomi/violet/violet:9/PKQ1.181203.001/V11.0.8.0.PFHINXM:user/release-keys" 
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
