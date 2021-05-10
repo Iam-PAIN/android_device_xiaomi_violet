@@ -16,8 +16,7 @@
 
 #include <aidl/android/hardware/power/BnPower.h>
 #include <android-base/file.h>
-#include "power-common.h"
-/*#include <android-base/logging.h>
+#include <android-base/logging.h>
 #include <linux/input.h>
 
 namespace {
@@ -54,9 +53,6 @@ int open_ts_input() {
     return fd;
 }
 }  // anonymous namespace
-*/
-
-#define DT2W_NODE "/sys/touchpanel/double_tap"
 
 namespace aidl {
 namespace android {
@@ -72,7 +68,6 @@ using ::aidl::android::hardware::power::Mode;
 bool isDeviceSpecificModeSupported(Mode type, bool* _aidl_return) {
     switch (type) {
         case Mode::DOUBLE_TAP_TO_WAKE:
-        case Mode::LOW_POWER:
             *_aidl_return = true;
             return true;
         default:
@@ -82,7 +77,7 @@ bool isDeviceSpecificModeSupported(Mode type, bool* _aidl_return) {
 
 bool setDeviceSpecificMode(Mode type, bool enabled) {
     switch (type) {
-        /*case Mode::DOUBLE_TAP_TO_WAKE: {
+        case Mode::DOUBLE_TAP_TO_WAKE: {
             int fd = open_ts_input();
             if (fd == -1) {
                 LOG(WARNING)
@@ -94,14 +89,9 @@ bool setDeviceSpecificMode(Mode type, bool enabled) {
             ev.code = SYN_CONFIG;
             ev.value = enabled ? kInputEventWakeupModeOn : kInputEventWakeupModeOff;
             write(fd, &ev, sizeof(ev));
-            close(fd);*/
-        case Mode::DOUBLE_TAP_TO_WAKE:
-            ::android::base::WriteStringToFile(enabled ? "1" : "0", DT2W_NODE, true);
+            close(fd);
             return true;
-        case Mode::LOW_POWER:
-            power_hint(POWER_HINT_LOW_POWER, reinterpret_cast<void*>(enabled));
-            return true;
-        /*}*/
+        }
         default:
             return false;
     }
